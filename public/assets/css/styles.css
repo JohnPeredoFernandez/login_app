@@ -1,0 +1,430 @@
+/* ---------- Variables de diseño ---------- */
+:root {
+  --fondo: #f1f4f9;
+  /* Gris azulado muy claro para el fondo de página. */
+  --superficie: #ffffff;
+  /* Blanco de la tarjeta */
+  --texto: #18212f;
+  /* Casi negro: contraste alto para lectura */
+  --texto-suave: #5a6678;
+  /* Gris para textos secundarios */
+  --borde: #d3dae5;
+  /* Borde de campos y tarjeta */
+  --borde-suave: #e5e9f0;
+  /* Separadores internos */
+  --acento: #1d4ed8;
+  /* Azul corporativo (botón, enlaces, foco) */
+  --acento-oscuro: #1e40af;
+  /* Azul más oscuro para el estado hover */
+  --acento-claro: #e8eefc;
+  /* Fondo suave del avatar */
+  --error: #b42318;
+  /* Rojo de error */
+  --error-fondo: #fef3f2;
+  --ok: #067647;
+  /* Verde de éxito */
+  --ok-fondo: #ecfdf3;
+  --radio: 8px;
+  --fuente-ui: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+}
+
+/* box-sizing: border-box => el padding no agranda el ancho declarado */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* la barra del navegador móvil */
+  display: grid;
+  place-items: center;
+  /* Centra la tarjeta en ambos ejes */
+  padding: 1.25rem;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente-ui);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =====================================================================
+   TARJETA CONTENEDORA
+   ===================================================================== */
+.tarjeta {
+  width: 100%;
+  max-width: 440px;
+  padding: 2rem 1.5rem 1.5rem;
+  background: var(--superficie);
+  border: 1px solid var(--borde-suave);
+  border-radius: 12px;
+  /* Sombra doble: una cercana y definida, otra amplia y suave */
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 12px 32px -12px rgba(16, 24, 40, 0.16);
+}
+
+/* ---------- Cabecera de marca (icono + nombre del sistema) ---------- */
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+/* Cuadrado redondeado con el icono del candado */
+.marca-icono {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radio);
+  background: var(--acento);
+  color: #fff;
+}
+
+.marca-icono svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.sub {
+  margin: 0 0 1.5rem;
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+/* =====================================================================
+   FORMULARIO
+   ===================================================================== */
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+/* En el alta, nombre y apellido comparten fila cuando hay espacio */
+.fila {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Etiqueta visible sobre el campo (más clara y accesible que una etiqueta flotante) */
+.campo label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.campo input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: #fff;
+  color: var(--texto);
+  font: inherit;
+  font-size: 1rem;
+  /* 16px evita el zoom automático de iOS */
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.campo input:hover {
+  border-color: #aab4c5;
+}
+
+/* Foco: borde azul + halo suave (indicador claro para navegación con teclado) */
+.campo input:focus {
+  outline: none;
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.18);
+}
+
+/* :user-invalid marca el error solo después de que el usuario interactuó con el campo */
+.campo input:user-invalid {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+}
+
+/* Contenedor del input de contraseña: permite ubicar el botón del ojo encima */
+.entrada {
+  position: relative;
+}
+
+.entrada input {
+  padding-right: 3rem;
+}
+
+.ojo {
+  position: absolute;
+  right: 0.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--texto-suave);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.ojo:hover {
+  color: var(--texto);
+  background: #eef1f6;
+}
+
+.ojo svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ojo .tachado {
+  opacity: 0;
+}
+
+/* La raya aparece al mostrar la clave */
+.ojo[aria-pressed="true"] .tachado {
+  opacity: 1;
+}
+
+/* ---------- Botones ---------- */
+button {
+  font: inherit;
+}
+
+button[type="submit"],
+button.secundario {
+  width: 100%;
+  height: 2.75rem;
+  margin-top: 0.25rem;
+  padding: 0 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radio);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+/* Botón principal: azul sólido */
+button[type="submit"] {
+  background: var(--acento);
+  color: #fff;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: var(--acento-oscuro);
+}
+
+/* Botón secundario (cerrar sesión): blanco con borde */
+button.secundario {
+  background: #fff;
+  color: var(--texto);
+  border-color: var(--borde);
+}
+
+button.secundario:hover {
+  background: #f6f8fb;
+  border-color: #aab4c5;
+}
+
+/* Estado "enviando": auth.js deshabilita el botón */
+button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* Foco visible para quien navega con teclado */
+button:focus-visible,
+a:focus-visible,
+.ojo:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+/* ---------- Mensajes de estado (errores / éxito) ---------- */
+.mensaje {
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: var(--radio);
+  font-size: 0.9rem;
+}
+
+/* Sin texto no ocupa espacio, pero sigue en el DOM para que los lectores de pantalla lo anuncien */
+.mensaje:empty {
+  padding: 0;
+  border: 0;
+  margin: -0.5rem 0 0;
+}
+
+.mensaje.error {
+  color: var(--error);
+  background: var(--error-fondo);
+  border-color: #fecdca;
+}
+
+.mensaje.ok {
+  color: var(--ok);
+  background: var(--ok-fondo);
+  border-color: #abefc6;
+}
+
+/* ---------- Enlaces ---------- */
+.enlace {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--borde-suave);
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.925rem;
+}
+
+.enlace a {
+  color: var(--acento);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.enlace a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Pie de la tarjeta ---------- */
+.pie {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.78rem;
+}
+
+/* =====================================================================
+   PÁGINA DE BIENVENIDA
+   ===================================================================== */
+.centrado {
+  text-align: center;
+}
+
+/* Avatar circular con la inicial del usuario */
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: var(--acento-claro);
+  color: var(--acento);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* Etiqueta "Sesión activa" */
+.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--ok-fondo);
+  color: var(--ok);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.estado i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+
+/* Lista de datos del usuario (definición: término a la izquierda, valor a la derecha) */
+.datos {
+  margin: 1.5rem 0 0;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio);
+  text-align: left;
+}
+
+.datos div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.925rem;
+}
+
+.datos div+div {
+  border-top: 1px solid var(--borde-suave);
+}
+
+.datos dt {
+  color: var(--texto-suave);
+}
+
+.datos dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.acciones {
+  margin-top: 1.25rem;
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+/* Desde 520px: nombre y apellido en dos columnas y más aire interior */
+@media (min-width: 520px) {
+  .fila {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tarjeta {
+    padding: 2.25rem 2.25rem 1.75rem;
+  }
+}
+
+/* Accesibilidad: si el sistema pide menos movimiento, se apagan las transiciones */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
