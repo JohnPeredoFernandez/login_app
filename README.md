@@ -1,6 +1,6 @@
 # Proyecto Login
 
-**Alumno/a:** [John Peredo]
+**Alumno:** [John Peredo]
 **Materia:** [Análisis de Sistemas]
 **Año de cursada:** [2026]
 
