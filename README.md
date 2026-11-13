@@ -20,10 +20,10 @@ Sistema de autenticación con tres pantallas: inicio de sesión, alta de usuario
 
 ## Instalación
 
-1. Copiar la carpeta del proyecto a `C:/xampp/htdocs/login_app`.
-2. Ejecutar `sql/schema.sql` en MySQL 8 (Workbench o phpMyAdmin). Crea la base `login_app`, la tabla `usuarios` y un usuario con permisos mínimos (solo SELECT e INSERT).
-3. Si se cambia la contraseña de `login_app_user` en el script SQL, actualizarla también en `src/config/database.php`.
-4. Iniciar Apache en XAMPP y abrir `http://localhost/login_app/public/index.php`.
+1. Copiar la carpeta del proyecto a `C:/xampp/htdocs/ProyectoLogin_TP3`.
+2. Ejecutar `sql/schema.sql` en MySQL 8 (Workbench o phpMyAdmin). Crea la base `ProyectoLogin_TP3`, la tabla `usuarios` y un usuario con permisos mínimos (solo SELECT e INSERT).
+3. Si se cambia la contraseña de `ProyectoLogin_TP3_user` en el script SQL, actualizarla también en `src/config/database.php`.
+4. Iniciar Apache en XAMPP y abrir `http://localhost/ProyectoLogin_TP3/public/index.php`.
 
 Nota: el script usa el collation `utf8mb4_0900_ai_ci`, que existe solo en MySQL 8. Con MariaDB hay que reemplazarlo por `utf8mb4_unicode_ci`.
 
